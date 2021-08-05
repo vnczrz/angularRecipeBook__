@@ -1,0 +1,104 @@
+
+.recipe-img {
+        width: 60%;
+        margin: auto;
+        display: block;
+}
+
+@media only screen and (min-width: 1200px){
+    .recipe-description {
+        padding-left: 40px;
+        padding-right: 40px;
+        margin: 30px 0 0;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .recipe-description{
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: 30px 0 0;
+    }
+}
+
+.recipe-description__inner-wrapper {
+    margin: 0 auto;
+    max-width: 600px;
+    border-left: 2px solid #e3ded3;
+    padding-left: 16px;
+}
+
+.recipe-description__text {
+    font-size: 2.1rem;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    line-height: 1.4;
+    max-width: 500px;
+}
+
+.recipe-ingredients__title {
+    
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #665f52;
+    margin-bottom: 24px;
+}
+
+.recipe-ingredients__list {
+    border-top: 2px solid #1a3b20;
+    grid-area: stats;
+    padding: 0;
+    margin: 0;
+    display: block;
+    background-color: #fff;
+}
+
+.recipe-ingredients__item {
+    list-style: none;
+    list-style-position: initial;
+    list-style-image: initial;
+    list-style-type: none;
+    margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid rgba(102,95,82,0.5);
+}
+
+.recipe-ingredients__item--amount {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    padding: 12px;
+    text-align: right;
+}
+
+@media only screen and (min-width: 768px){
+.recipe-ingredients__item--amount-inner {
+    font-size: 1.8rem;
+}
+}
+.recipe-ingredients__item--amount-inner {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+/* @media only screen and (min-width: 1200px)
+* {
+    font-size: 1.6rem;
+} */
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: inherit;
+    font-size: 1.8rem;
+}
+
+.recipe-ingredients__item--ingredient {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border-left: 1px solid rgba(115,57,69,0.5);
+    padding: 12px;
+}

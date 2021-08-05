@@ -1,1 +1,59 @@
-<p>recipes-detail works!</p>
+<div class="row">
+    <div class="col-xs-10">
+        <img [src]="recipe.imagePath" 
+        alt="{{ recipe.name }}" 
+        class="img-responsive recipe-img" 
+        style="max-height: 300px;">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-4 ">
+        <h1 class="recipe-description__text">{{ recipe.name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4">
+        <div 
+        appDropdown 
+        class="btn-group p-3">
+            <button type="button" class="btn btn-primary dropdown-toggle  pull-left ">
+                Manage Recipe <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a (click)="onAddToShoppingList()" style="cursor: pointer" >Add To Shopping List</a></li>
+                <li><a href="#">Edit Recipe</a></li>
+                <li><a href="#">Delete Recipe</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="recipe-description col-xs-10">
+        
+        <div class="recipe-description__inner-wrapper">
+            <p class="recipe-description__text">{{recipe.description}}</p>
+        </div>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8">
+        <h3 class="recipe_ingredients__title">Ingredients</h3>
+        <ul class="recipe-ingredients__list"
+            *ngFor="let ingredient of recipe.ingredients">
+            <li class="recipe-ingredients__item">
+                <span class="recipe-ingredients__item--amount"> 
+                    <span class="recipe-ingredients__item--amount-inner">{{ingredient.amount}} {{ingredient.unit}}</span> 
+                </span>
+                <span class="recipe-ingredients__item--ingredient">
+                    {{ ingredient.name }}
+                </span> 
+            </li>
+
+        </ul>
+    </div>
+</div>
+

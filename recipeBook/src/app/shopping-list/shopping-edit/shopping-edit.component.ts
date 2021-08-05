@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
+
 
 @Component({
   selector: 'app-shopping-edit',
@@ -6,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
+  @ViewChild('nameInput', {static: false}) nameInputRef : ElementRef;
+  @ViewChild('amountInput', {static: false}) amountInputRef: ElementRef;
+  @ViewChild('unitInput', {static: false}) unitInputRef: ElementRef;
 
-  constructor() { }
+  constructor( private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
   }
 
+  onAddItem(){
+    const ingName = this.nameInputRef.nativeElement.value;
+    const ingAmount = this.amountInputRef.nativeElement.value;
+    const ingUnit = this.unitInputRef.nativeElement.value;
+
+    const newIngredient = new Ingredient(ingName, ingAmount, ingUnit);
+
+    //call on logic from service and pass the element we extracted, and emit event
+    this.shoppingListService.addIngredient(newIngredient);
+    //this.shoppingListService.ingredientsChanged.emit(newIngredient);
+    
+  }
+
 }
+
+// @Output() ingredientAdded = new EventEmitter<Ingredient>();
+// this.ingredientAdded.emit(newIngredient);
