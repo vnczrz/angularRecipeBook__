@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-xs-12">
-        <form>
+        <!-- use local reference and pass to method -->
+        <form 
+        #f="ngForm"
+        (ngSubmit)="onAddItem(f)">
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="name">Name</label>
@@ -8,30 +11,38 @@
                     type="text" 
                     id="name" 
                     class="form-control"
-                    #nameInput>
+                    name="name"
+                    ngModel
+                    required>
                 </div>
                 <div class="col-sm-2 form-group">
+                    <!-- pattern is example of using regex to check input -->
                     <label for="amount">Amount</label>
                     <input 
                     type="number" 
                     id="amount"
                     class="form-control"
-                    #amountInput>
+                    name="amount"
+                    ngModel
+                    required
+                    pattern="^[1-9]+[0-9]*$">
                 </div>
-                <div class="col-sm-1 form-group">
-                    <label for="amount">Unit</label>
+                <div class="col-sm-2 form-group">
+                    <label for="Unit">Unit</label>
                     <input 
-                    type="string" 
-                    id="amount"
+                    type="text" 
+                    id="unit"
                     class="form-control"
-                    #unitInput>
+                    name="unit"
+                    ngModel>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
+                    <!-- ternary expression checks if we are in edit more or not -->
+                    <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+                    <button class="btn btn-danger" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
+                    <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
                 </div>
             </div>
         </form>

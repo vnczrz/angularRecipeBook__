@@ -1,7 +1,17 @@
-<a href="#" 
+<a 
+style="cursor: pointer"
 class="list-group-item clearfix"
-(click)="onSelected()" 
+[routerLink]= "[index]"
+routerLinkActive="active"
 >
+
+    <div class="pull-left">
+        <h4 class="list0-group-item-heading">{{ recipe.name }}</h4>
+    </div>
+
+</a>
+<!-- [routerLink]= "['/detail', recipe.name ]" -->
+
     <!-- <div>
         <img  
         [src]="recipe.imagePath"
@@ -12,8 +22,3 @@ class="list-group-item clearfix"
         margin: auto;
         display: block;">
     </div> -->
-    <div class="pull-left">
-        <h4 class="list0-group-item-heading">{{ recipe.name }}</h4>
-    </div>
-
-</a>

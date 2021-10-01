@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ShoppingListService } from './shopping-list.service';
 
 import { Ingredient } from '../shared/ingredient.model';
+import { Subscription } from 'rxjs';
 
 
 
@@ -10,23 +11,33 @@ import { Ingredient } from '../shared/ingredient.model';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ingredients: Ingredient[];
+  private igChangeSub: Subscription;
 
   constructor( private shoppingListService: ShoppingListService) { }
 
   ngOnInit(){
     this.ingredients = this.shoppingListService.getIngredients();
 
-    //set up listener, so on ingredientsChanged event get informed of any changes, use subscribe method
-    //use recieved data from subscribe set ingredients Prop to data recieved
-    this.shoppingListService.ingredientsChanged
+    //subscribe to observable(subject) from shopping list service
+    this.igChangeSub = this.shoppingListService.ingredientsChanged
       .subscribe(
         (ingredients: Ingredient[]) => {
           this.ingredients = ingredients;
         }
       );
+  }
+
+  onEditItem(index: number) {
+    ///use subject for cross app coms and send this to edit component...emit the value we pass on to the subject
+    this.shoppingListService.startedEditing.next(index);
+    
+  }
+
+  ngOnDestroy(): void {
+    this.igChangeSub.unsubscribe();
   }
 
 }

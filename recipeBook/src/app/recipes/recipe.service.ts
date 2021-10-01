@@ -1,17 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 
+//import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RecipeService {
-  //property for cross app coms to provide selected recipe, emit 
-  recipeSelected = new EventEmitter<Recipe>();
+  //property for cross app coms to provide selected recipe, subject 
+  //recipeSelected = new Subject<Recipe>();
   
 
 
@@ -59,6 +60,13 @@ export class RecipeService {
     //use .slice() to return a copy of the array, not reference
     return this.recipes.slice();
   }
+  
+  //return single recipe by index
+  getRecipe(index: number) {
+    //return recipe at index of id
+    return this.recipes.slice()[index];
+  }
+
 
   //method to access shopping list service
   addIngredientsToShoppingList( ingredients : Ingredient[]) {

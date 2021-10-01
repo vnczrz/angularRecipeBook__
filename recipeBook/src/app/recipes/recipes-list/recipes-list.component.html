@@ -3,9 +3,9 @@
 <div class="row">
     <div class="col-xs-12">
         <app-recipes-item 
-        [recipe]="recipeEl"
-        *ngFor="let recipeEl of recipes"
-        
+        [recipe]="recipe"
+        *ngFor="let recipe of recipes; let i = index"
+        [index]="i"
         ></app-recipes-item>
     </div>
 </div>

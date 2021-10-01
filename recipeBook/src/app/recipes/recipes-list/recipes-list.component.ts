@@ -11,13 +11,15 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipesListComponent implements OnInit {
   
-  recipes: Recipe[];
+  public recipes: Recipe[];
   
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
     //on init call method from recipeService to to init list of recipes prop
     this.recipes = this.recipeService.getRecipes();
+
+    console.log(this.recipes)
   }
 
 

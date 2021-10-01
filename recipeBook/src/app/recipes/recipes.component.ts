@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from './recipe.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from './recipe.service';
 
 @Component({
@@ -9,19 +9,15 @@ import { RecipeService } from './recipe.service';
   providers: [RecipeService]
 })
 export class RecipesComponent implements OnInit {
-  selectedRecipe: Recipe;
+  // selectedRecipe: Recipe;
 
-  constructor( private recipeService: RecipeService) { }
+  // constructor( private recipeService: RecipeService) { }
+  constructor( private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    //set up listener, so on recipeSelected event get informed of any changes, use subscribe method
-    //use recieved data from subscribe and pass onto selectedRecipe Prop in this component which can then be passed on to recipesDetail template using property binding 
-    this.recipeService.recipeSelected
-      .subscribe(
-        (recipe: Recipe) => {
-          this.selectedRecipe = recipe
-        }
-      );
+  ngOnInit() { }
+ 
+  onNewRecipe(){
+    this.router.navigate(['new'], {relativeTo: this.route}); 
   }
 
 
