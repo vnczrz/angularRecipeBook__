@@ -31,7 +31,7 @@ export class RecipesDetailComponent implements OnInit {
           }
       );
 
-    
+      //subscribe so when deleted page is updated
 
   }
 
@@ -44,6 +44,13 @@ export class RecipesDetailComponent implements OnInit {
 
   onEditRecipe(){
     this.router.navigate(['edit'], { relativeTo: this.route })
+  }
+
+  onDeleteRecipe(){
+    //pass id we extracted from route
+    this.recipeService.deleteRecipe(this.id);
+    //navigate away when finished
+    this.router.navigate(['/recipes']);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -13,7 +14,9 @@ import { Recipe } from './recipe.model';
 export class RecipeService {
   //property for cross app coms to provide selected recipe, subject 
   //recipeSelected = new Subject<Recipe>();
-  
+
+  //subject that will emit new observable when we change the array of recipes
+  recipesChanged = new Subject<Recipe[]>();
 
 
   //manage recipes here in service
@@ -72,6 +75,27 @@ export class RecipeService {
   addIngredientsToShoppingList( ingredients : Ingredient[]) {
     //reach out to slservice and call addingredients()
     this.shoppingListService.addIngredients(ingredients)
+  }
+
+  //addRecipe
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+    //emit subject to 
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe){
+    this.recipes[index] =  newRecipe;
+    //emit new data using subject
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    //delete items from array
+    this.recipes.splice(index, 1);
+
+    //emit new value to observables
+    this.recipesChanged.next(this.recipes.slice());
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 
 import { Recipe } from '../recipe.model';
@@ -9,19 +10,29 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.css']
 })
-export class RecipesListComponent implements OnInit {
+export class RecipesListComponent implements OnInit, OnDestroy {
   
   public recipes: Recipe[];
+  subscription: Subscription;
   
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
+    //subscribe to observable being emitted by recipesChanged = new Subject<Recipe>();
+    this.recipeService.recipesChanged
+      .subscribe(
+        (recipes : Recipe[]) => {//subject emits recipe obj as obs
+          this.recipes = recipes;//pass that into current array of recipes
+        }
+      ); 
     //on init call method from recipeService to to init list of recipes prop
     this.recipes = this.recipeService.getRecipes();
 
-    console.log(this.recipes)
   }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
 
 }
