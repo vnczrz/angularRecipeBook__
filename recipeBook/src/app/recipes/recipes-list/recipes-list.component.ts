@@ -19,7 +19,7 @@ export class RecipesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //subscribe to observable being emitted by recipesChanged = new Subject<Recipe>();
-    this.recipeService.recipesChanged
+    this.subscription = this.recipeService.recipesChanged
       .subscribe(
         (recipes : Recipe[]) => {//subject emits recipe obj as obs
           this.recipes = recipes;//pass that into current array of recipes
